@@ -47,6 +47,8 @@ no <C-h> <C-w>h| "switching to left window
 nmap <C-n> :NERDTreeToggle<CR>
 
 Plugin 'scrooloose/nerdcommenter' "commetline
+let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
+let g:NERDSpaceDelims = 1
 filetype plugin on
 
 Plugin 'ctrlpvim/ctrlp.vim'
