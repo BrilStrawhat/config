@@ -47,7 +47,10 @@ no <C-h> <C-w>h| "switching to left window
 nmap <C-n> :NERDTreeToggle<CR>
 
 Plugin 'scrooloose/nerdcommenter' "commetline
-"Plugin 'majutsushi/tagbar'  No necessary for now
+filetype plugin on
+
+Plugin 'ctrlpvim/ctrlp.vim'
+""^^ For search Ctrl+P
 
 Plugin 'wesQ3/vim-windowswap'
 
