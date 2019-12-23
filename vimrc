@@ -18,17 +18,16 @@ set expandtab
 :nnoremap A :noh<cr>A
 :nnoremap v :noh<cr>v
 :nnoremap V :noh<cr>V
+:nnoremap q :noh<cr>
+"disable comment after O and <enter>:
+autocmd BufNewFile,BufRead * setlocal formatoptions=cql
 
-:command C !clang -std=c17 -Wall -Wextra -Werror -Wpedantic  /Users/tyerofieie/ucode/libmx/fortest.c /Users/tyerofieie/ucode/libmx/src/*.c -I /Users/tyerofieie/ucode/libmx/inc -o /Users/tyerofieie/ucode/libmx/out.out
-:command H e /Users/tyerofieie/ucode/libmx/inc/libmx.h
-:command CC !clang -Wall -Wextra -Werror -Wpedantic /Users/tyerofieie/ucode/libmx/test.c /Users/tyerofieie/ucode/libmx/src/*.c -I /Users/tyerofieie/ucode/libmx/inc -o /Users/tyerofieie/ucode/libmx/tost.out
-:command M e /Users/tyerofieie/ucode/libmx/fortest.c
-:command O !/Users/tyerofieie/ucode/libmx/out.out 
-:command OO !/Users/tyerofieie/ucode/libmx/tost.out 
+:command C !clang -std=c17 -Wall -Wextra -Werror -Wpedantic /home/bril/ucode/libmx/fortest.c /home/bril/ucode/libmx/src/*.c -I /home/bril/ucode/libmx/inc -o /home/bril/ucode/libmx/out.out
+:command H e /home/bril/ucode/libmx/inc/libmx.h
+:command CC !clang -Wall -Wextra -Werror -Wpedantic *.c ../../myheder.h -o ../out.out
+:command M e /home/bril/ucode/libmx/fortest.c
+:command O !/home/bril/ucode/libmx/out.out 
 
-":command C !clang -std=c17 -Wall -Wextra -Werror -Wpedantic  ../fortest.c *.c  -o ../out.out
-":command M e ../fortest.c
-":command O !../out.out 
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -44,17 +43,14 @@ no <C-j> <C-w>j| "switching to below window
 no <C-k> <C-w>k| "switching to above window
 no <C-l> <C-w>l| "switching to right window 
 no <C-h> <C-w>h| "switching to left window
-nmap <C-n> :NERDTreeToggle<CR>
-
-Plugin 'scrooloose/nerdcommenter' "commetline
-let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
-let g:NERDSpaceDelims = 1
-filetype plugin on
+map <C-n> :NERDTreeToggle<CR>
 
 Plugin 'ctrlpvim/ctrlp.vim'
 ""^^ For search Ctrl+P
-
-Plugin 'wesQ3/vim-windowswap'
+Plugin 'scrooloose/nerdcommenter' "commetline*/*/
+let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
+let g:NERDSpaceDelims = 1
+filetype plugin on
 
 call vundle#end()            " required
 filetype plugin indent on    " required
