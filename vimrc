@@ -22,12 +22,28 @@ set expandtab
 "disable comment after O and <enter>:
 autocmd BufNewFile,BufRead * setlocal formatoptions=cql
 
-:command C !clang -std=c17 -Wall -Wextra -Werror -Wpedantic /home/bril/ucode/libmx/fortest.c /home/bril/ucode/libmx/src/*.c -I /home/bril/ucode/libmx/inc -o /home/bril/ucode/libmx/out.out
-:command H e /home/bril/ucode/libmx/inc/libmx.h
-:command CC !clang -Wall -Wextra -Werror -Wpedantic *.c ../../myheder.h -o ../out.out
-:command M e /home/bril/ucode/libmx/fortest.c
-:command O !/home/bril/ucode/libmx/out.out 
+" libmx
+" :command C !clang -std=c17 -Wall -Wextra -Werror -Wpedantic 
+        " \ /home/bril/ucode/libmx/fortest.c
+        " \ /home/bril/ucode/libmx/src/*.c
+        " \ -I /home/bril/ucode/libmx/inc -o
+        " \ /home/bril/ucode/libmx/out.out
+" :command H e /home/bril/ucode/libmx/inc/libmx.h
+" :command CC !clang -Wall -Wextra -Werror -Wpedantic *.c ../../myheder.h -o ../out.out
+" :command M e /home/bril/ucode/libmx/fortest.c
+" :command O !/home/bril/ucode/libmx/out.out 
 
+" pathfinder 
+:command C !clang -std=c17 -Wall -Wextra -Werror -Wpedantic
+        \ /home/bril/ucode/pathfinder/src/*.c
+        \ /home/bril/ucode/libmx/libmx.a
+        \ -I /home/bril/ucode/pathfinder/inc
+        \ -I /home/bril/ucode/libmx/inc 
+        \ -o /home/bril/ucode/pathfinder/pathfinder
+:command H e /home/bril/ucode/pathfinder/inc/pathfinder.h
+:command CC !clang -Wall -Wextra -Werror -Wpedantic *.c ../../pathfinder.h -o ../out.out
+:command O !/home/bril/ucode/pathfinder/pathfinder test
+" :command -nargs=1 O !/home/bril/ucode/pathfinder/pathfinder <args>
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
