@@ -11,13 +11,8 @@ set expandtab
 :set completeopt=longest,menuone
 :set colorcolumn=79
 :hi ColorColumn ctermbg=6
+set tags=tags;
 ":noh after this command: 
-:nnoremap i :noh<cr>i
-:nnoremap I :noh<cr>I
-:nnoremap a :noh<cr>a
-:nnoremap A :noh<cr>A
-:nnoremap v :noh<cr>v
-:nnoremap V :noh<cr>V
 :nnoremap q :noh<cr>
 "disable comment after O and <enter>:
 autocmd BufNewFile,BufRead * setlocal formatoptions=cql
