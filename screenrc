@@ -1,0 +1,8 @@
+autodetach on 
+startup_message off 
+hardstatus alwayslastline 
+altscreen on
+defscrollback 10000
+
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
+
