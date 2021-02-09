@@ -1,3 +1,5 @@
+" should install vim-gtk to use y"+
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set nu
