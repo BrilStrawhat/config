@@ -152,8 +152,7 @@
 (use-package evil-collection
   :after evil
   :config
-  (evil-collection-init))
-
+  (evil-collection-init 'anaconda-mode))
 (global-set-key (kbd "C-i") 'evil-jump-forward)
 
 (defun my/dired-copy-dirname-as-kill ()
@@ -214,7 +213,6 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
 
-(use-package magit-gerrit)
 (use-package smart-comment)
 (use-package cmake-mode
     :ensure t
@@ -223,7 +221,9 @@
 (use-package auto-complete)
 (global-auto-complete-mode t)
 
-(use-package json-navigator)
+(use-package ranger)
+
+(add-hook 'python-mode-hook 'anaconda-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -232,7 +232,7 @@
  ;; If there is more than one, they won't work right.
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(json-navigator auto-complete magit-gerrit ivy helm undo-tree ggtags evil-collection which-key use-package rainbow-delimiters mode-line-bell ivy-rich evil-visual-mark-mode doom-modeline counsel command-log-mode)))
+   '(adoc-mode anaconda-mode jedi auto-complete magit-gerrit ivy helm undo-tree ggtags evil-collection which-key use-package rainbow-delimiters mode-line-bell ivy-rich evil-visual-mark-mode doom-modeline counsel command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
