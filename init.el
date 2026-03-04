@@ -1,9 +1,7 @@
-;; describe-key-briefly
+; describe-key-briefly
 ;; view-lossageV
 
 (setq inhibit-startup-message t)
-
-(setq grep-command "grep -rIn")
 
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
@@ -21,6 +19,7 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 ;; (setq split-window-preferred-function 'split-window-horizontally)
+(setq enable-remote-dir-locals t)
 
 (setq-default frame-title-format "%b (%f)")
 (add-hook 'prog-mode-hook
@@ -118,6 +117,7 @@
   (setq ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
 
 (use-package undo-tree
+
   :init
   (global-undo-tree-mode 1))
 
@@ -152,12 +152,9 @@
 
 
 (use-package evil-collection
-  :ensure t
   :after evil
-  :init
-  (evil-collection-init))
-  ;:config
-  ;(evil-collection-init 'anaconda-mode))
+  :config
+  (evil-collection-init 'anaconda-mode))
 (global-set-key (kbd "C-i") 'evil-jump-forward)
 
 (defun my/dired-copy-dirname-as-kill ()
@@ -174,7 +171,7 @@
 
   (rune/leader-keys
    "t"  '(:ignore t :which-key "toggles")
-   "tt" '(counsel-load-theme :which-key "choose theme")))
+   "tt" '(toggle-input-method :which-key "toggle-input-method")))
 
 (rune/leader-keys
   "c"  '(:ignore c :which-key "comment/copy")
@@ -195,6 +192,10 @@
   "su" '(smerge-keep-upper :which-key "keep upper")
   "sa" '(smerge-keep-all :which-key "keep all")
   "sn" '(smerge-next :which-key "next"))
+
+
+(rune/leader-keys
+   "r" '(repeat-complex-command :which-key "repeat-complex"))
 
 (use-package hydra)
 
@@ -228,76 +229,17 @@
 
 (use-package ranger)
 
-(use-package magit
-  :ensure t)
-(with-eval-after-load 'magit-mode
-  (add-hook 'after-save-hook 'magit-after-save-refresh-status t))
-
-(use-package maxima)
-
-(use-package yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-
-(use-package tidal)
-(add-hook 'comint-mode-hook 'evil-local-mode)
-
-;; tidal autocompleat 
-(defun tidal-get-completion-symbols ()
-  "Get completion symbols from Sound.Tidal.Context"
-  (let* ((tidal-browse (shell-command-to-string
-                        (combine-and-quote-strings
-                         (append
-                          (cons tidal-interpreter tidal-interpreter-arguments)
-                          '("-e" ":browse Sound.Tidal.Context")))))
-         (tidal-symbols-with-ns (mapcar
-                                 #'(lambda (s)
-                                     (car (split-string s)))
-                                 (cl-remove-if #'(lambda (s)
-                                                   (string-prefix-p " " s))
-                                               (split-string tidal-browse "\n"))))
-         (tidal-names (mapcar
-                       #'(lambda (s)
-                           (string-remove-suffix ")" (car (reverse (split-string s "\\.")))))
-                       (cl-remove-if nil tidal-symbols-with-ns)))
-         (tidal-symbols (cl-remove-if
-                         #'(lambda (s)
-                             (string-prefix-p "_" s))
-                         tidal-names)))
-    tidal-symbols))
-
-(setq tidal-keywords (tidal-get-completion-symbols))
-
-(defun tidal-completion-at-point ()
-  "Tidal Cycles function for `completion-at-point-functions`."
-  (interactive)
-  (let* (
-         (bds (bounds-of-thing-at-point 'symbol))
-         (start (car bds))
-         (end (cdr bds)))
-    (list start end tidal-keywords . nil)))
-
-(add-hook 'completion-at-point-functions
-            #'tidal-completion-at-point nil t)
-
-(require 'typescript-mode)
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-
-
-(use-package csharp-mode
-  :ensure t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode)))
+(add-hook 'python-mode-hook 'anaconda-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default-input-method "ukrainian-computer")
+ '(auth-source-save-behavior nil)
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   (quote
-    (csharp-mode typespec-ts-mode typescript-mode tidal magit adoc-mode anaconda-mode jedi auto-complete magit-gerrit ivy helm undo-tree ggtags evil-collection which-key use-package rainbow-delimiters mode-line-bell ivy-rich evil-visual-mark-mode doom-modeline counsel command-log-mode))))
+   '(adoc-mode anaconda-mode jedi auto-complete magit-gerrit ivy helm undo-tree ggtags evil-collection which-key use-package rainbow-delimiters mode-line-bell ivy-rich evil-visual-mark-mode doom-modeline counsel command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
